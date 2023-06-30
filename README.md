@@ -1,1 +1,1 @@
-# 2-folders-merge
+This program will read all files in the source1 folder, move all files to a new folder(merged). It will rename all files upon transfer. It will then do the same with source2. At the end, source1 & source2 will be merged into 1 folder. The program will also produce a .txt file listing all the name changes. 
