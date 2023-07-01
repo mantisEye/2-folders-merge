@@ -59,8 +59,8 @@ public class FolderMerger {
 
         if (Files.exists(folder)) {
             Files.walk(folder, FileVisitOption.FOLLOW_LINKS)
-                .sorted((a, b) - > b.compareTo(a)) // sort in reverse order for proper deletion
-                .forEach(path - > {
+                .sorted((a, b) -> b.compareTo(a)) // sort in reverse order for proper deletion
+                .forEach(path -> {
                     try {
                         Files.delete(path);
                     } catch (IOException e) {
