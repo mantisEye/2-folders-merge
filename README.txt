@@ -4,3 +4,5 @@ This program will read all files in the source1 folder, move all files to a new 
 New change to implement: it no longer overwrite files name upon a transfer, instead it adds a 's1-3' before the original name. s1 or s2 is which source folder, followed by a number counter. 
 No need for the txt file. 
 Also, we can make it multiple source files. 
+
+^^ DONE.

@@ -1,11 +1,6 @@
-import java.util.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.FileWriter;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.nio.file.FileVisitOption;
-import javax.imageio.ImageIO;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,33 +8,27 @@ import java.nio.file.StandardCopyOption;
 
 public class FolderMerger {
 
-    public static int items = 1;
+    public static int sourceN = 0;
 
     public static void main(String[] args) throws Exception {
 
         // create a new output folder
         createFolder("merged");
 
-        FileWriter writer = new FileWriter("name_change_list.txt");
-
-        // open folder (source1), collect all files
+        // open folder (source1), collect all files and put them in merged
         File source1 = new File("./source1");
         File[] files = source1.listFiles();
-
-        meatAndPotatos(writer, files, "./source1");
+        sourceN++;
+        meatAndPotatos(files, "./source1");
 
         // repeat for source2
         File source2 = new File("./source2");
         files = source2.listFiles();
+        sourceN++;
+        meatAndPotatos(files, "./source2");
 
-        meatAndPotatos(writer, files, "./source2");
-
-        System.out.println(items + " items been moved.");
-
-        writer.close();
+       System.out.println("Files have been successfully merged and moved. Check the 'merged' folder.");
     }
-
-
 
     public static void createFolder(String folderPath) throws IOException {
 
@@ -70,20 +59,15 @@ public class FolderMerger {
         }
     }
 
-    public static void meatAndPotatos(FileWriter writer, File[] files, String sPath) throws IOException {
+    public static void meatAndPotatos(/*FileWriter writer,*/ File[] files, String sPath) throws IOException {
+        
+        int items = 1;
         for (int i = 0; i < files.length; i++) {
 
             File currFile = files[i];
 
             // get the extention
-            String filename = currFile.getName();
-            String extension = filename.substring(filename.lastIndexOf('.') + 1);
-
-            String newName = "item" + (items++) + "." + extension;
-
-            // add to the name_change_list
-            writer.append(currFile.getName() + "  ->  " + newName + "\n");
-            writer.flush();
+            String newName = "s"+ sourceN + "-" + (items++) + "_" + currFile.getName();
 
             // move and rename
             Path sourcePath = Path.of(sPath, currFile.getName());
